@@ -6,9 +6,11 @@ import { ReactComponent as Logo } from '../../assets/crown.svg';
 import { auth } from '../../firebase/firebase.utils';
 
 import { connect } from 'react-redux';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 const Header = (props) => {
-  const { currentUser } = props;
+  const { currentUser, hidden } = props;
 
   return (
     <div className="header">
@@ -31,7 +33,9 @@ const Header = (props) => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      {!hidden && <CartDropdown />}
     </div>
   );
 };
@@ -39,6 +43,7 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   return {
     currentUser: state.user.currentUser,
+    hidden: state.cart.hidden,
   };
 };
 
