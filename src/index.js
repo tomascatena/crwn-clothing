@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 import App from './App';
 import './index.css';
@@ -9,13 +10,15 @@ import './index.css';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
-import store from './redux/store';
+import { store, persistor } from './redux/store';
 
 const app = (
   <Provider store={store}>
     <BrowserRouter>
       <React.StrictMode>
-        <App />
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
       </React.StrictMode>
     </BrowserRouter>
   </Provider>
